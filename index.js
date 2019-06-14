@@ -1,5 +1,6 @@
 const app = require("express")();
 const axios = require("axios");
+const Promise = require("bluebird");
 const _ = require("lodash");
 const cors = require("cors");
 const port = process.env.PORT || 5000;
@@ -7,30 +8,39 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 
 app.get("/posts", async (req, res) => {
-  const { topic } = req.query;
+  const validFields = ["topic", "topic2", "topic3"];
+  const topicsObj = _.pick(req.query, validFields);
+  const topics = Object.values(topicsObj);
 
-  // Fetch posts on topic
-  const result = await axios.get(
-    `https://medium.com/topic/${topic}?format=json`
-  );
-
-  // Format json
-  const data = JSON.parse(result.data.substring(16, result.data.length));
-
-  const { references } = data.payload;
-
-  // Get users from posts
-  const users = Object.values(references.User);
-
-  // Get posts with extended data like post-link and author
-  const posts = Object.values(references.Post).map(post => {
-    const user = _.find(users, ["userId", post.creatorId]);
-    const link = `https://medium.com/@${user.username}/${post.uniqueSlug}`;
-
-    return { ...post, linkToPost: link, author: user };
+  const promises = topics.map(async topic => {
+    return await axios.get(`https://medium.com/topic/${topic}?format=json`);
   });
 
-  // Return posts
+  const posts = await Promise.all(promises).then(res => {
+    const resultArr = Object.values(res);
+
+    const postsByTopic = {};
+    resultArr.forEach(resultObj => {
+      const fullTopic = resultObj.data;
+      const parsedTopic = JSON.parse(fullTopic.substring(16, fullTopic.length));
+
+      const { references, topic } = parsedTopic.payload;
+
+      // Get users from posts
+      const users = Object.values(references.User);
+
+      // Get posts with extended data like post-link and author
+      postsByTopic[topic.slug] = Object.values(references.Post).map(post => {
+        const user = _.find(users, ["userId", post.creatorId]);
+        const link = `https://medium.com/@${user.username}/${post.uniqueSlug}`;
+
+        return { ...post, linkToPost: link, author: user };
+      });
+    });
+
+    return postsByTopic;
+  });
+
   res.send({ posts });
 });
 
