@@ -7,6 +7,11 @@ A wrapper for fetching posts from Medium™ using their "?format=json" method. W
 - A link to the actual post on Medium™
 - A full object with data about the author
 
+### Example
+
+An example of an implementation and use of this wrapper can be seen here:
+
+- [https://medium-posts.now.sh/](https://medium-posts.now.sh/)
 
 ## GET request
 
