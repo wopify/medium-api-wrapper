@@ -1,2 +1,107 @@
 # medium-api-wrapper
 A wrapper for fetching medium-posts on topic and only get the useful data back
+
+## GET request
+
+    https://vast-journey-70991.herokuapp.com/posts?topic={topic}
+    
+### Topics
+
+```
+{
+  "Arts & Entertainment": [
+    "Art",
+    "Beauty",
+    "Books",
+    "Comics",
+    "Culture",
+    "Fiction",
+    "Film",
+    "Food",
+    "Gaming",
+    "Humor",
+    "Music",
+    "Photography",
+    "Podcasts",
+    "Poetry",
+    "Social Media",
+    "Sports",
+    "Style",
+    "TV",
+    "Writing"
+  ],
+  "Industry": [
+    "Business",
+    "Design",
+    "Economy",
+    "Freelancing",
+    "Leadership",
+    "Marketing",
+    "Product Management",
+    "Productivity",
+    "Startups",
+    "Venture Capital",
+    "Work"
+  ],
+  "Innovation & Tech": [
+    "Accessibility",
+    "Android Dev",
+    "Artificial Intelligence",
+    "Blockchain",
+    "Cryptocurrency",
+    "Cybersecurity",
+    "Data Science",
+    "Digital Life",
+    "Gadgets",
+    "Javascript",
+    "Machine Learning",
+    "Math",
+    "Neuroscience",
+    "Programming",
+    "Science",
+    "Self-Driving Cars",
+    "Software Engineering",
+    "Space",
+    "Technology",
+    "UX",
+    "Visual Design",
+    "iOS Dev"
+  ],
+  "Life": [
+    "Addiction",
+    "Creativity",
+    "Disability",
+    "Family",
+    "Health",
+    "Lifestyle",
+    "Mental Health",
+    "Mindfulness",
+    "Money",
+    "Parenting",
+    "Pets",
+    "Psychology",
+    "Relationships",
+    "Self",
+    "Travel"
+  ],
+  "Society": [
+    "Cities",
+    "Education",
+    "Environment",
+    "Equality",
+    "Future",
+    "History",
+    "Immigration",
+    "Justice",
+    "Language",
+    "Media",
+    "Philosophy",
+    "Politics",
+    "Privacy",
+    "Race",
+    "Religion",
+    "Transportation"
+  ]
+}
+
+```
