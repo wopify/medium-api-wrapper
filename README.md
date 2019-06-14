@@ -1,5 +1,5 @@
 # medium-api-wrapper
-A wrapper for fetching medium-posts on topic and only get the useful data back
+A wrapper for fetching medium-posts on topics and only get the useful data back
 
 ### Description
 A wrapper for fetching posts from Medium™ using their "?format=json" method. What you then get back is 10 posts from their feed on that topic that day. What returned from this wrapper will add are a couple of things. For example:
@@ -15,7 +15,7 @@ An example of an implementation and use of this wrapper can be seen here:
 
 ## GET request
 
-    https://vast-journey-70991.herokuapp.com/posts?topic={topic}
+    https://vast-journey-70991.herokuapp.com/posts?topic={topic}&topic2={topic2}&topic3={topic3}
     
 ### Topics
 
