@@ -30,12 +30,16 @@ app.get("/posts", async (req, res) => {
       const users = Object.values(references.User);
 
       // Get posts with extended data like post-link and author
-      postsByTopic[topic.slug] = Object.values(references.Post).map(post => {
-        const user = _.find(users, ["userId", post.creatorId]);
-        const link = `https://medium.com/@${user.username}/${post.uniqueSlug}`;
+      postsByTopic[topic.slug] = Object.values(references.Post)
+        .map(post => {
+          const user = _.find(users, ["userId", post.creatorId]);
+          const link = `https://medium.com/@${user.username}/${
+            post.uniqueSlug
+          }`;
 
-        return { ...post, linkToPost: link, author: user };
-      });
+          return { ...post, linkToPost: link, author: user };
+        })
+        .sort((a, b) => b.createdAt - a.createdAt);
     });
 
     return postsByTopic;
